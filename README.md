@@ -36,6 +36,7 @@ In this project, you can build your own C++ application or extend this Snake gam
 
 # Bugs Fixed
 * Fix bug regarding placing food out of right boundaries: [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/db211626a0bc68c7a0367db8740d7eb3fec5f72b)
+* Fix bug of snake moving to the opposite direction: [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/e859197f67da484c8a1b6c07ff63e512765b2393)
 
 ## Project Rubrics
 * [x] README (All Rubric Points REQUIRED):
@@ -52,8 +53,8 @@ In this project, you can build your own C++ application or extend this Snake gam
   * [ ] The project uses Object Oriented Programming techniques.
   * [x] Classes use appropriate access specifiers for class members. --> Snake speed is updated through IncreaseSpeed method
   * [ ] Class constructors utilize member initialization lists.
-  * [ ] Classes abstract implementation details from their interfaces.
-  * [ ] Classes encapsulate behavior.
+  * [x] Classes abstract implementation details from their interfaces. --> Snake hides to controller its last moved direction.
+  * [x] Classes encapsulate behavior. --> Controller only forwards the direction to move, then snake decides if it is allowed or not by checking last direction moved.
   * [ ] Classes follow an appropriate inheritance hierarchy.
   * [ ] Overloaded functions allow the same function to operate on different parameters.
   * [ ] Derived class functions override virtual base class functions.
@@ -63,7 +64,7 @@ In this project, you can build your own C++ application or extend this Snake gam
   * [ ] The project uses destructors appropriately.
   * [ ] The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate.
   * [ ] The project follows the Rule of 5.
-  * [ ] The project uses move semantics to move data, instead of copying it, where possible.
+  * [x] The project uses move semantics to move data, instead of copying it, where possible. --> When defining the level of difficulty in main, the value is passed to Game() class as it is not more useull inside main.
   * [ ] The project uses smart pointers instead of raw pointers.
 * [ ] Concurrency
   * [ ] The project uses multithreading.
