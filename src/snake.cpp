@@ -93,6 +93,8 @@ void Snake::IncreaseSpeed()
   speed = std::min(MAX_SPEED, speed + speedIncrement);
 }
 
+// Ask snake to change direction. 
+// Snake will ignore the command if is in opposite direction to current movement.
 void Snake::ChangeDirection(Direction nextDirection)
 {
   // Ignore the command if next direction is the opposite to last movement and size > 1
@@ -108,7 +110,6 @@ void Snake::ChangeDirection(Direction nextDirection)
 
   direction = nextDirection;
 }
-
 
 // Return de last direction where the snake has moved
 Snake::Direction Snake::GetPreviousDirection() const
