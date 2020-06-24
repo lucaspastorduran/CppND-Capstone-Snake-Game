@@ -6,14 +6,18 @@
 
 class Snake {
  public:
-  enum class Direction { kUp, kDown, kLeft, kRight };
+  enum class Direction 
+  { 
+    kUp, kDown, kLeft, kRight
+  };
 
   Snake(int grid_width, int grid_height, int speed_increase)
       : grid_width(grid_width),
         grid_height(grid_height),
         head_x(grid_width / 2),
         head_y(grid_height / 2),
-        speedIncrement(speed_increase*DIFFICULTY_TO_SPEED_RATIO)
+        speedIncrement(speed_increase*DIFFICULTY_TO_SPEED_RATIO),
+        previosuDirection(direction)
   {
   }
 
@@ -23,6 +27,8 @@ class Snake {
   bool SnakeCell(int x, int y);
 
   void IncreaseSpeed();
+  void ChangeDirection(Direction nextDirection);
+  Direction GetPreviousDirection() const;
 
   Direction direction = Direction::kUp;
 
@@ -39,8 +45,9 @@ class Snake {
   bool growing{false};
   int grid_width;
   int grid_height;
-  float speed{0.1f};
 
+  float speed{0.1f};
+  Direction previosuDirection;
 
   // Snake defines its maximum velocity
   // Velocity below 1.0 can cause issues displaying the snake

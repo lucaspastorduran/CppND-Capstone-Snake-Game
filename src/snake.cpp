@@ -61,6 +61,9 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
       alive = false;
     }
   }
+
+  // Store the last direction where Snake has moved
+  previosuDirection = direction;
 }
 
 void Snake::GrowBody() { growing = true; }
@@ -88,4 +91,27 @@ void Snake::IncreaseSpeed()
   }
 
   speed = std::min(MAX_SPEED, speed + speedIncrement);
+}
+
+void Snake::ChangeDirection(Direction nextDirection)
+{
+  // Ignore the command if next direction is the opposite to last movement and size > 1
+  if (((previosuDirection == Direction::kUp && nextDirection == Direction::kDown) ||
+      (previosuDirection == Direction::kDown && nextDirection == Direction::kUp) ||
+      (previosuDirection == Direction::kLeft && nextDirection == Direction::kRight) ||
+      (previosuDirection == Direction::kLeft && nextDirection == Direction::kRight) ||
+      (previosuDirection == Direction::kRight && nextDirection == Direction::kLeft)) &&
+      (size > 1))
+  {
+    return;
+  }
+
+  direction = nextDirection;
+}
+
+
+// Return de last direction where the snake has moved
+Snake::Direction Snake::GetPreviousDirection() const
+{
+  return previosuDirection;
 }
