@@ -2,11 +2,12 @@
 #include <iostream>
 #include "SDL.h"
 
-Game::Game(std::size_t grid_width, std::size_t grid_height)
+Game::Game(std::size_t grid_width, std::size_t grid_height, int &&difficulty_level)
     : snake(grid_width, grid_height),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
-      random_h(0, static_cast<int>(grid_height - 1)) {
+      random_h(0, static_cast<int>(grid_height - 1)),
+      difficultyLevel(std::move(difficulty_level)) {
   PlaceFood();
 }
 
@@ -36,7 +37,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer.UpdateWindowTitle(score, frame_count);
+      renderer.UpdateWindowTitle(score, frame_count, difficultyLevel);
       frame_count = 0;
       title_timestamp = frame_end;
     }
@@ -75,13 +76,16 @@ void Game::Update() {
 
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
-    score++;
+    score += difficultyLevel;
     PlaceFood();
     // Grow snake and increase speed.
     snake.GrowBody();
-    snake.speed += 0.02;
+    // Speed increase depends on difficulty level
+    // BUG: when speed is above 1 (at 1.05 starts bug)
+    snake.speed += (difficultyLevel*0.01);
   }
 }
 
 int Game::GetScore() const { return score; }
 int Game::GetSize() const { return snake.size; }
+int Game::GetDifficultyLevel() const { return difficultyLevel; }

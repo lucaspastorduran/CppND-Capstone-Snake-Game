@@ -32,3 +32,4 @@ build/CMakeFiles/SnakeGame.dir/src/game.cpp.o
 build/CMakeFiles/SnakeGame.dir/src/main.cpp.o
 build/CMakeFiles/SnakeGame.dir/src/renderer.cpp.o
 build/CMakeFiles/SnakeGame.dir/src/snake.cpp.o
+.vscode/settings.json

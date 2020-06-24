@@ -11,9 +11,19 @@ int main() {
   constexpr std::size_t kGridWidth{32};
   constexpr std::size_t kGridHeight{32};
 
+  // Select level of difficulty
+  int difficultyLevel;
+  std::cout << "Select difficulty level from 1 to 5:" << std::endl;
+  std::cin >> difficultyLevel;
+  while (difficultyLevel < 1 || difficultyLevel > 5)
+  {
+    std::cout << "Select difficulty level from 1 to 5:" << std::endl;
+    std::cin >> difficultyLevel;
+  }
+
   Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
   Controller controller;
-  Game game(kGridWidth, kGridHeight);
+  Game game(kGridWidth, kGridHeight, std::move(difficultyLevel));
   game.Run(controller, renderer, kMsPerFrame);
   std::cout << "Game has terminated successfully!\n";
   std::cout << "Score: " << game.GetScore() << "\n";
