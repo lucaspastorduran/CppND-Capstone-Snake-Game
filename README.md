@@ -31,7 +31,11 @@ In this project, you can build your own C++ application or extend this Snake gam
 4. Run it: `./SnakeGame`.
 
 ## New Features
-* The user can select a level of difficulty from 1 to 5. The more difficulty, the more the snake speed increases and more points earns for eating food.
+* The user can select a level of difficulty from 1 to 5. The more difficulty, the more the snake speed increases and more points earns for eating food. [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/efe02bd2192f236c80508c13fdfb1db822c95ba0)
+* Snake speed is defined as private member in Snake, so Game must use "IncreaseSpeed" method to update its value. In that way, snake also controls its maximum speed set to 0.95. [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/8a368253ebade78f06bd8a87ebbda8d94a67795e)
+
+# Bugs Fixed
+* Fix bug regarding placing food out of right boundaries: [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/db211626a0bc68c7a0367db8740d7eb3fec5f72b)
 
 ## Project Rubrics
 * [x] README (All Rubric Points REQUIRED):
@@ -46,7 +50,7 @@ In this project, you can build your own C++ application or extend this Snake gam
   * [x] The project accepts user input and processes the input. --> User can select the level of difficulty: it is displayed in the window title and affects the increase of speed and points each time the snake eats food.
 * [ ] Object Oriented Programming
   * [ ] The project uses Object Oriented Programming techniques.
-  * [ ] Classes use appropriate access specifiers for class members.
+  * [x] Classes use appropriate access specifiers for class members. --> Snake speed is updated through IncreaseSpeed method
   * [ ] Class constructors utilize member initialization lists.
   * [ ] Classes abstract implementation details from their interfaces.
   * [ ] Classes encapsulate behavior.
