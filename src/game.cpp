@@ -3,7 +3,7 @@
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height, int &&difficulty_level)
-    : snake(grid_width, grid_height),
+    : snake(grid_width, grid_height, difficulty_level),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)),
@@ -82,7 +82,7 @@ void Game::Update() {
     snake.GrowBody();
     // Speed increase depends on difficulty level
     // BUG: when speed is above 1 (at 1.05 starts bug)
-    snake.speed += (difficultyLevel*0.01);
+    snake.IncreaseSpeed();
   }
 }
 

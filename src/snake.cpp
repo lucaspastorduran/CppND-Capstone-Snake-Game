@@ -77,3 +77,15 @@ bool Snake::SnakeCell(int x, int y) {
   }
   return false;
 }
+
+// Increase snake speed velocity according to game difficulty
+// and limiting it to a maximum.
+void Snake::IncreaseSpeed()
+{
+  if (speed >= MAX_SPEED)
+  {
+    return;
+  }
+
+  speed = std::min(MAX_SPEED, speed + speedIncrement);
+}
