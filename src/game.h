@@ -25,7 +25,7 @@ class Game {
   std::uniform_int_distribution<int> random_w;
   std::uniform_int_distribution<int> random_h;
 
-  std::shared_ptr<Controller> _controller;
+  std::unique_ptr<Controller> _controller;
   //std::shared_ptr<Renderer> _renderer;
 
   int score{0};

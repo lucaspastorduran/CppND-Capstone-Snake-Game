@@ -9,7 +9,7 @@ Game::Game(std::size_t grid_width, std::size_t grid_height, int &&difficulty_lev
       difficultyLevel(std::move(difficulty_level)) 
 {
   _snake = std::make_shared<Snake>(Snake(grid_width, grid_height, difficultyLevel));
-  _controller = std::make_shared<Controller> (Controller(_snake));
+  _controller = std::make_unique<Controller> (Controller(_snake));
   
   PlaceFood();
 }
