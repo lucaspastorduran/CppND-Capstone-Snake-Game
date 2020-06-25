@@ -16,8 +16,10 @@ class Renderer {
   void UpdateWindowTitle(int score, int fps, int difficultyLevel);
 
  private:
-  SDL_Window *sdl_window;
-  SDL_Renderer *sdl_renderer;
+  // an ordinary delete call is not correct. 
+  // We use decltype to automatically construct the correct deleter format from the deleter function.
+  std::unique_ptr<SDL_Window, decltype(&SDL_DestroyWindow)> _sdlWindow;
+  std::unique_ptr<SDL_Renderer, decltype(&SDL_DestroyRenderer)> _sdlRenderer;
 
   const std::size_t screen_width;
   const std::size_t screen_height;
