@@ -33,6 +33,8 @@ In this project, you can build your own C++ application or extend this Snake gam
 ## New Features
 * The user can select a level of difficulty from 1 to 5. The more difficulty, the more the snake speed increases and more points earns for eating food. [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/efe02bd2192f236c80508c13fdfb1db822c95ba0)
 * Snake speed is defined as private member in Snake, so Game must use "IncreaseSpeed" method to update its value. In that way, snake also controls its maximum speed set to 0.95. [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/8a368253ebade78f06bd8a87ebbda8d94a67795e)
+* Composition: Snake class is allocated in heap as a smart pointer inside Game class: [commit] (https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/ca23bdc6643ceb37782a597ca89b52b3498b4bf2)
+* Composition: Conroller class is allocated in heap as a smart pointer inside Game class: [commit] (https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/ca23bdc6643ceb37782a597ca89b52b3498b4bf2)
 
 # Bugs Fixed
 * Fix bug regarding placing food out of right boundaries: [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/db211626a0bc68c7a0367db8740d7eb3fec5f72b)
@@ -50,7 +52,7 @@ In this project, you can build your own C++ application or extend this Snake gam
   * [ ] The project reads data from a file and process the data, or the program writes data to a file.
   * [x] The project accepts user input and processes the input. --> User can select the level of difficulty: it is displayed in the window title and affects the increase of speed and points each time the snake eats food.
 * [ ] Object Oriented Programming
-  * [ ] The project uses Object Oriented Programming techniques.
+  * [x] The project uses Object Oriented Programming techniques. --> Controller class is located inside Game in order to hide it from main and abstract.
   * [x] Classes use appropriate access specifiers for class members. --> Snake speed is updated through IncreaseSpeed method
   * [ ] Class constructors utilize member initialization lists.
   * [x] Classes abstract implementation details from their interfaces. --> Snake hides to controller its last moved direction.
@@ -62,10 +64,10 @@ In this project, you can build your own C++ application or extend this Snake gam
 * [ ] Memory Management
   * [ ] The project makes use of references in function declarations.
   * [ ] The project uses destructors appropriately.
-  * [ ] The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate.
+  * [x] The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate. --> Smart pointers are used instead of raw pointers, which ise the RAII principle, deallocating memory as soon as their owner class goes out of scope.
   * [ ] The project follows the Rule of 5.
   * [x] The project uses move semantics to move data, instead of copying it, where possible. --> When defining the level of difficulty in main, the value is passed to Game() class as it is not more useull inside main.
-  * [ ] The project uses smart pointers instead of raw pointers.
+  * [x] The project uses smart pointers instead of raw pointers. --> Snake, Controller are allocated in heap and have smart pointers pointing to theme inside Game class.
 * [ ] Concurrency
   * [ ] The project uses multithreading.
   * [ ] A promise and future is used in the project.
