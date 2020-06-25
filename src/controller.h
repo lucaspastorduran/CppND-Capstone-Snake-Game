@@ -2,13 +2,15 @@
 #define CONTROLLER_H
 
 #include "snake.h"
+#include <memory>
 
 class Controller {
  public:
-  void HandleInput(bool &running, Snake &snake) const;
+    Controller(std::shared_ptr<Snake> snake);
+    void HandleInput(bool &running);
 
  private:
- // Should have here a smart pointer to snake
+    std::shared_ptr<Snake> _snake;
 };
 
 #endif

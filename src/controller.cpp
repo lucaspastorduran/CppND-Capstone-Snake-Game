@@ -3,7 +3,12 @@
 #include "SDL.h"
 #include "snake.h"
 
-void Controller::HandleInput(bool &running, Snake &snake) const {
+Controller::Controller(std::shared_ptr<Snake> snake) :
+  _snake(snake)
+{
+}
+
+void Controller::HandleInput(bool &running) {
   SDL_Event e;
   while (SDL_PollEvent(&e)) 
   {
@@ -16,19 +21,19 @@ void Controller::HandleInput(bool &running, Snake &snake) const {
       switch (e.key.keysym.sym) 
       {
         case SDLK_UP:
-          snake.ChangeDirection(Snake::Direction::kUp);
+          _snake->ChangeDirection(Snake::Direction::kUp);
           break;
 
         case SDLK_DOWN:
-          snake.ChangeDirection(Snake::Direction::kDown);
+          _snake->ChangeDirection(Snake::Direction::kDown);
           break;
 
         case SDLK_LEFT:
-          snake.ChangeDirection(Snake::Direction::kLeft);
+          _snake->ChangeDirection(Snake::Direction::kLeft);
           break;
 
         case SDLK_RIGHT:
-          snake.ChangeDirection(Snake::Direction::kRight);
+          _snake->ChangeDirection(Snake::Direction::kRight);
           break;
       }
     }
