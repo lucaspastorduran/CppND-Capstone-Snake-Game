@@ -21,9 +21,9 @@ int main() {
     std::cin >> difficultyLevel;
   }
 
-  Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
-  Game game(kGridWidth, kGridHeight, std::move(difficultyLevel));
-  game.Run(renderer, kMsPerFrame);
+  //Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
+  Game game(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight, std::move(difficultyLevel));
+  game.Run(kMsPerFrame);
   std::cout << "Game has terminated successfully!\n";
   std::cout << "Score: " << game.GetScore() << "\n";
   std::cout << "Size: " << game.GetSize() << "\n";

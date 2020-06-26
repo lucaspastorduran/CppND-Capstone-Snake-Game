@@ -2,19 +2,21 @@
 #include <iostream>
 #include "SDL.h"
 
-Game::Game(std::size_t grid_width, std::size_t grid_height, int &&difficulty_level)
+Game::Game(std::size_t screen_width, std::size_t screen_heigth, 
+          std::size_t grid_width, std::size_t grid_height, int &&difficulty_level)
     : engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)),
       difficultyLevel(std::move(difficulty_level)) 
 {
-  _snake = std::make_shared<Snake>(Snake(grid_width, grid_height, difficultyLevel));
+  _snake = std::make_shared<Snake> (Snake(grid_width, grid_height, difficultyLevel));
   _controller = std::make_unique<Controller> (Controller(_snake));
+  _renderer = std::make_unique<Renderer> (Renderer(_snake, screen_width, screen_heigth, grid_width, grid_height));
   
   PlaceFood();
 }
 
-void Game::Run(Renderer &renderer, std::size_t target_frame_duration) {
+void Game::Run(std::size_t target_frame_duration) {
   Uint32 title_timestamp = SDL_GetTicks();
   Uint32 frame_start;
   Uint32 frame_end;
@@ -28,7 +30,7 @@ void Game::Run(Renderer &renderer, std::size_t target_frame_duration) {
     // Input, Update, Render - the main game loop.
     _controller->HandleInput(running);
     Update();
-    renderer.Render(_snake, food);
+    _renderer->Render(food);
 
     frame_end = SDL_GetTicks();
 
@@ -39,7 +41,7 @@ void Game::Run(Renderer &renderer, std::size_t target_frame_duration) {
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer.UpdateWindowTitle(score, frame_count, difficultyLevel);
+      _renderer->UpdateWindowTitle(score, frame_count, difficultyLevel);
       frame_count = 0;
       title_timestamp = frame_end;
     }

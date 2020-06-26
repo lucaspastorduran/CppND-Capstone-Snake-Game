@@ -40,11 +40,18 @@ Renderer::Renderer(const std::size_t screen_width,
   }
 }
 
+Renderer::Renderer(std::shared_ptr<Snake> snake, const std::size_t screen_width, const std::size_t screen_height,
+        const std::size_t grid_width, const std::size_t grid_height) :
+  _snake(snake),
+  Renderer::Renderer(screen_width, screen_height, grid_width, grid_height)
+{ 
+}
+
 Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(std::shared_ptr<Snake> snake, SDL_Point const &food) {
+void Renderer::Render(SDL_Point const &food) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
@@ -61,7 +68,7 @@ void Renderer::Render(std::shared_ptr<Snake> snake, SDL_Point const &food) {
 
   // Render snake's body
   SDL_SetRenderDrawColor(_sdlRenderer.get(), 0xFF, 0xFF, 0xFF, 0xFF);
-  for (SDL_Point const &point : snake->body) {
+  for (SDL_Point const &point : _snake->body) {
     block.x = point.x * block.w;
     block.y = point.y * block.h;
     SDL_RenderFillRect(_sdlRenderer.get(), &block);
