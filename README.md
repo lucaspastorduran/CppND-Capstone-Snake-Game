@@ -33,8 +33,9 @@ In this project, you can build your own C++ application or extend this Snake gam
 ## New Features
 * The user can select a level of difficulty from 1 to 5. The more difficulty, the more the snake speed increases and more points earns for eating food. [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/efe02bd2192f236c80508c13fdfb1db822c95ba0)
 * Snake speed is defined as private member in Snake, so Game must use "IncreaseSpeed" method to update its value. In that way, snake also controls its maximum speed set to 0.95. [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/8a368253ebade78f06bd8a87ebbda8d94a67795e)
-* Composition: Snake class is allocated in heap as a smart pointer inside Game class: [commit] (https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/ca23bdc6643ceb37782a597ca89b52b3498b4bf2)
-* Composition: Conroller class is allocated in heap as a smart pointer inside Game class: [commit] (https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/ca23bdc6643ceb37782a597ca89b52b3498b4bf2)
+* Composition: Snake class is allocated in heap as a smart pointer inside Game class: [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/ca23bdc6643ceb37782a597ca89b52b3498b4bf2)
+* Composition: Conroller class is allocated in heap as a smart pointer inside Game class: [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/ca23bdc6643ceb37782a597ca89b52b3498b4bf2)
+* Memory Management: SDL_WIindow and SDL_Renderer are stored as unique_ptr's inside Renderer: [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/31ed09fca1da8af03fa67591531c792c28dde0c1)
 
 # Bugs Fixed
 * Fix bug regarding placing food out of right boundaries: [commit](https://github.com/lucaspastorduran/CppND-Capstone-Snake-Game/commit/db211626a0bc68c7a0367db8740d7eb3fec5f72b)
@@ -63,11 +64,11 @@ In this project, you can build your own C++ application or extend this Snake gam
   * [ ] Templates generalize functions in the project.
 * [ ] Memory Management
   * [ ] The project makes use of references in function declarations.
-  * [ ] The project uses destructors appropriately.
+  * [x] The project uses destructors appropriately. --> Have set the proper destructors for SDL_Window and SDL_Renderer unique_ptr's, so no memory leaks.
   * [x] The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate. --> Smart pointers are used instead of raw pointers, which ise the RAII principle, deallocating memory as soon as their owner class goes out of scope.
   * [ ] The project follows the Rule of 5.
   * [x] The project uses move semantics to move data, instead of copying it, where possible. --> When defining the level of difficulty in main, the value is passed to Game() class as it is not more useull inside main.
-  * [x] The project uses smart pointers instead of raw pointers. --> Snake, Controller are allocated in heap and have smart pointers pointing to theme inside Game class.
+  * [x] The project uses smart pointers instead of raw pointers. --> Snake, Controller are allocated in heap and have smart pointers pointing to theme inside Game class. Also SDL_Window and SDL_Renderer inside Renderer.
 * [ ] Concurrency
   * [ ] The project uses multithreading.
   * [ ] A promise and future is used in the project.
