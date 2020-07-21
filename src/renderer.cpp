@@ -42,13 +42,25 @@ Renderer::Renderer(const std::size_t screen_width,
 
 Renderer::Renderer(std::shared_ptr<Snake> snake, const std::size_t screen_width, const std::size_t screen_height,
         const std::size_t grid_width, const std::size_t grid_height) :
-  _snake(snake),
   Renderer::Renderer(screen_width, screen_height, grid_width, grid_height)
 { 
+  // Calling Renderer() constructor already constructs _snake, so we must do the assignation here.
+  _snake = snake;
 }
 
 Renderer::~Renderer() {
   SDL_Quit();
+}
+
+Renderer::Renderer(Renderer &&source) :
+  screen_width(source.screen_width),
+  screen_height(source.screen_height),
+  grid_width(source.grid_width),
+  grid_height(source.grid_height),
+  _snake(std::move(source._snake)),
+  _sdlWindow(std::move(source._sdlWindow)),
+  _sdlRenderer(std::move(source._sdlRenderer))
+{
 }
 
 void Renderer::Render(SDL_Point const &food) {
@@ -75,9 +87,9 @@ void Renderer::Render(SDL_Point const &food) {
   }
 
   // Render snake's head
-  block.x = static_cast<int>(snake->head_x) * block.w;
-  block.y = static_cast<int>(snake->head_y) * block.h;
-  if (snake->alive) {
+  block.x = static_cast<int>(_snake->head_x) * block.w;
+  block.y = static_cast<int>(_snake->head_y) * block.h;
+  if (_snake->alive) {
     SDL_SetRenderDrawColor(_sdlRenderer.get(), 0x00, 0x7A, 0xCC, 0xFF);
   } else {
     SDL_SetRenderDrawColor(_sdlRenderer.get(), 0xFF, 0x00, 0x00, 0xFF);

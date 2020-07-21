@@ -14,6 +14,14 @@ class Renderer {
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
+  // Rule of 3: Renderer has unique_ptr's we must explain how to handle theme in case of copys
+  Renderer(const Renderer &source) = delete;
+  Renderer& operator=(const Renderer &source) = delete;
+
+  // Rule of 5: Move constructor and Move operator
+  Renderer(Renderer &&source);
+  Renderer& operator=(Renderer &&source) = delete;
+
   void Render(SDL_Point const &food);
   void UpdateWindowTitle(int score, int fps, int difficultyLevel);
 
