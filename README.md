@@ -4,9 +4,10 @@ This is a starter repo for the Capstone project in the [Udacity C++ Nanodegree P
 
 <img src="snake_game.gif"/>
 
-The Capstone Project gives you a chance to integrate what you've learned throughout this program. This project will become an important part of your portfolio to share with current and future colleagues and employers.
-
-In this project, you can build your own C++ application or extend this Snake game, following the principles you have learned throughout this Nanodegree Program. This project will demonstrate that you can independently create applications using a wide range of C++ features.
+Rules:
+* The user selects the difficulty level at the beginning: from 1 to 5.
+* The higher the difficulty level, the faster the snake starts moving.
+* The higher the difficutly level, more points you get by each meal eaten.
 
 ## Dependencies for Running Locally
 * cmake >= 3.7
@@ -59,14 +60,14 @@ In this project, you can build your own C++ application or extend this Snake gam
   * [x] Classes abstract implementation details from their interfaces. --> Snake hides to controller its last moved direction.
   * [x] Classes encapsulate behavior. --> Controller only forwards the direction to move, then snake decides if it is allowed or not by checking last direction moved.
   * [ ] Classes follow an appropriate inheritance hierarchy.
-  * [ ] Overloaded functions allow the same function to operate on different parameters.
+  * [x] Overloaded functions allow the same function to operate on different parameters.
   * [ ] Derived class functions override virtual base class functions.
   * [ ] Templates generalize functions in the project.
 * [ ] Memory Management
   * [ ] The project makes use of references in function declarations.
   * [x] The project uses destructors appropriately. --> Have set the proper destructors for SDL_Window and SDL_Renderer unique_ptr's, so no memory leaks.
   * [x] The project uses scope / Resource Acquisition Is Initialization (RAII) where appropriate. --> Smart pointers are used instead of raw pointers, which ise the RAII principle, deallocating memory as soon as their owner class goes out of scope.
-  * [ ] The project follows the Rule of 5.
+  * [x] The project follows the Rule of 5. --> We construct the Render inside of Game by using move constructor.
   * [x] The project uses move semantics to move data, instead of copying it, where possible. --> When defining the level of difficulty in main, the value is passed to Game() class as it is not more useull inside main.
   * [x] The project uses smart pointers instead of raw pointers. --> Snake, Controller are allocated in heap and have smart pointers pointing to theme inside Game class. Also SDL_Window and SDL_Renderer inside Renderer.
 * [ ] Concurrency
