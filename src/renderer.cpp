@@ -49,7 +49,9 @@ Renderer::Renderer(std::shared_ptr<Snake> snake, const std::size_t screen_width,
 }
 
 Renderer::~Renderer() {
-  SDL_Quit();
+  // This destructor is called when Renderer is created as Rvalue and moved into the Heap
+  // As tis function closes the window, must be called only once: in Game desctructor.
+  //SDL_Quit();
 }
 
 Renderer::Renderer(Renderer &&source) :
@@ -61,6 +63,9 @@ Renderer::Renderer(Renderer &&source) :
   _sdlWindow(std::move(source._sdlWindow)),
   _sdlRenderer(std::move(source._sdlRenderer))
 {
+  // Is not necessary to NULL the "source" pointers as they are moved
+  //source._sdlWindow = nullptr;
+  //source._sdlRenderer = nullptr;
 }
 
 void Renderer::Render(SDL_Point const &food) {

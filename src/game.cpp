@@ -7,13 +7,18 @@ Game::Game(std::size_t screen_width, std::size_t screen_heigth,
     : engine(dev()),
       random_w(0, static_cast<int>(grid_width - 1)),
       random_h(0, static_cast<int>(grid_height - 1)),
-      difficultyLevel(std::move(difficulty_level)) 
+      difficultyLevel(std::move(difficulty_level))
 {
   _snake = std::make_shared<Snake> (Snake(grid_width, grid_height, difficultyLevel));
   _controller = std::make_unique<Controller> (Controller(_snake));
-  _renderer = std::make_unique<Renderer> (Renderer(_snake, screen_width, screen_heigth, grid_width, grid_height));
+  _renderer = std::make_unique<Renderer> (std::move(Renderer(_snake, screen_width, screen_heigth, grid_width, grid_height)));
   
   PlaceFood();
+}
+
+Game::~Game()
+{
+  SDL_Quit();
 }
 
 void Game::Run(std::size_t target_frame_duration) {

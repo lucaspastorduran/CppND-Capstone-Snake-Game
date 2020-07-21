@@ -12,6 +12,7 @@ class Game {
  public:
   Game(std::size_t screen_width, std::size_t screen_heigth, std::size_t grid_width, 
       std::size_t grid_height, int &&difficulty_level);
+  ~Game();
   void Run(std::size_t target_frame_duration);
   int GetScore() const;
   int GetSize() const;
